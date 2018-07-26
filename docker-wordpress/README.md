@@ -6,7 +6,16 @@
 4. O objetivo é instalar o Wordpress e disponibilizar o acesso na porta 80/TCP do host que executa o conteiner.
 5. O arquivo ``graph.png`` mostra o relacionamento entre os recursos gerenciados pelo Terraform.
 
-Fonte: http://blog.aeciopires.com/instalando-o-wordpress-via-docker
+Comandos mais usados:
+
+terraform --help    => Exibe a ajuda do comando terraform
+terraform providers => Imprime a árvore de providers usados na configuração
+terraform init      => Inicializa o diretório de trabalho do Terraform
+terraform validate  => Valida a sintaxe dos arquivos do Terraform
+terraform plan      => Gera e exibe o plano de execução (mas não altera nada)
+terraform apply     => Compila e altera a infraestrutura conforme o planejado
+terraform show      => Inspeciona e exibe o estado atual ou planejado da infraestrutura
+terraform destroy   => Destroi a infraestrutura gerenciada pelo Terraform
 
 # English
 
@@ -16,4 +25,15 @@ Fonte: http://blog.aeciopires.com/instalando-o-wordpress-via-docker
 4. The goal is to install Wordpress and provide access on port 80/TCP of the host that runs the container.
 5. The ``graph.png`` file shows the relationship between the resources managed by Terraform.
 
-Font: http://blog.aeciopires.com/instalando-o-wordpress-via-docker
+Useful commands:
+
+terraform --help    => Show help of command terraform
+terraform providers => Prints a tree of the providers used in the configuration
+terraform init      => Initialize a Terraform working directory
+terraform validate  => Validates the Terraform files
+terraform plan      => Generate and show an execution plan
+terraform apply     => Builds or changes infrastructure
+terraform show      => Inspect Terraform state or plan
+terraform destroy   => Destroy Terraform-managed infrastructure
+
+
