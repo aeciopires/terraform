@@ -32,7 +32,7 @@ Example of using terraform to provide and manage services and hosts. See the tut
 
 ## Developers
 
-developer: Aecio dos Santos Pires
+developer: Aecio dos Santos Pires<br>
 mail: http://blog.aeciopires.com/contato
 
 ## License
