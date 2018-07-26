@@ -8,14 +8,14 @@
 
 Comandos mais usados:
 
-terraform --help    => Exibe a ajuda do comando terraform
-terraform providers => Imprime a árvore de providers usados na configuração
-terraform init      => Inicializa o diretório de trabalho do Terraform
-terraform validate  => Valida a sintaxe dos arquivos do Terraform
-terraform plan      => Gera e exibe o plano de execução (mas não altera nada)
-terraform apply     => Compila e altera a infraestrutura conforme o planejado
-terraform show      => Inspeciona e exibe o estado atual ou planejado da infraestrutura
-terraform destroy   => Destroi a infraestrutura gerenciada pelo Terraform
+* terraform --help    => Exibe a ajuda do comando terraform<br>
+* terraform providers => Imprime a árvore de providers usados na configuração<br>
+* terraform init      => Inicializa o diretório de trabalho do Terraform<br>
+* terraform validate  => Valida a sintaxe dos arquivos do Terraform<br>
+* terraform plan      => Gera e exibe o plano de execução (mas não altera nada) <br>
+* terraform apply     => Compila e altera a infraestrutura conforme o planejado<br>
+* terraform show      => Inspeciona e exibe o estado atual ou planejado da infraestrutura<br>
+* terraform destroy   => Destroi a infraestrutura gerenciada pelo Terraform<br>
 
 # English
 
@@ -27,13 +27,13 @@ terraform destroy   => Destroi a infraestrutura gerenciada pelo Terraform
 
 Useful commands:
 
-terraform --help    => Show help of command terraform
-terraform providers => Prints a tree of the providers used in the configuration
-terraform init      => Initialize a Terraform working directory
-terraform validate  => Validates the Terraform files
-terraform plan      => Generate and show an execution plan
-terraform apply     => Builds or changes infrastructure
-terraform show      => Inspect Terraform state or plan
-terraform destroy   => Destroy Terraform-managed infrastructure
+* terraform --help    => Show help of command terraform<br>
+* terraform providers => Prints a tree of the providers used in the configuration<br>
+* terraform init      => Initialize a Terraform working directory<br>
+* terraform validate  => Validates the Terraform files<br>
+* terraform plan      => Generate and show an execution plan<br>
+* terraform apply     => Builds or changes infrastructure<br>
+* terraform show      => Inspect Terraform state or plan<br>
+* terraform destroy   => Destroy Terraform-managed infrastructure<br>
 
 
