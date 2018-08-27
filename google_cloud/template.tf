@@ -25,7 +25,8 @@
 # MAIN
 #----------------------------
 
-# The values of variables are defined in files 'variables.tf'
+# The values of variables are defined in files 'variables.tf' and
+# 'modules/application/variables.tf'
 
 # Contents of a file that contains your service account private key in JSON format.
 # You can download your existing Google Cloud service account file from the

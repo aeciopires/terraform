@@ -2,7 +2,7 @@
 
 0. Será necessário você criar uma conta no Google Cloud (https://cloud.google.com) e, em seguida, baixar o arquivo com as credenciais em https://console.cloud.google.com/apis/credentials/serviceaccountkey
 1. Este diretório contém o arquivo ``template.tf`` que define as configurações gerais do Google Cloud. Ele contém também o arquivo ``variables.tf`` onde você pode definir os valores das variáveis usadas pelo ``template.tf``.
-2. O subdiretório ``modules/application`` possui o arquivo ``application.tf`` que define a criação das instâncias.
+2. O subdiretório ``modules/application`` possui o arquivo ``application.tf``, que define a criação das instancias. Ele contém também o arquivo ``variables.tf``, onde você pode definir os valores das variáveis usadas pelo ``application.tf``.
 3. Altere os valores de acordo com a necessidade.
 4. O objetivo é criar 3 instâncias e liberar o acesso remoto.
 5. O arquivo ``graph.png`` mostra o relacionamento entre os recursos gerenciados pelo Terraform.
@@ -22,7 +22,7 @@ Comandos mais usados:
 
 0. You do not need to create a Google Cloud account (https://cloud.google.com) and then download the file with credentials at https://console.cloud.google.com/apis/credentials/serviceaccountkey
 1. This directory contains the ``template.tf`` file that defines the general Google Cloud settings. It also contains the ``variables.tf`` file where you can set the option values by ``template.tf``.
-2. The ``modules/application`` subdirectory has the ``application.tf`` file that defines the creation of the instances.
+2. The ``modules/application`` subdirectory has the ``application.tf`` file that defines the creation of instances. It also contains the variables.tf file where you can define the values of the variables used by ``application.tf``.
 3. Change the values according to the need.
 4. The goal is to create 3 instances and release the remote access.
 5. The ``graph.png`` file shows the relationship between the resources managed by Terraform.
