@@ -1,3 +1,5 @@
-url_zabbix_api: http://172.17.0.1/api_jsonrpc.php
-login: Admin
-password: zabbix
+# Default pillar values
+zabbix.user: "Admin"
+zabbix.password: "zabbix"
+zabbix.url: "http://172.17.0.1/api_jsonrpc.php"
+
