@@ -148,3 +148,28 @@ resource "docker_image" "image4" {
   name         = "zabbix/zabbix-agent:ubuntu-${var.version_zabbix}-latest"
   keep_locally = true
 }
+
+resource "null_resource" "saltstack_provisioning" {
+  depends_on = [
+    "docker_container.container2",
+    "docker_container.container3",
+    "docker_container.container4" ],
+
+  #provisioner "salt-masterless" {
+  #  local_state_tree    = "salt"
+  #  remote_state_tree   = "/srv/salt"
+  #  local_pillar_roots  = "pillar"
+  #  remote_pillar_roots = "/srv/pillar"
+  #}
+
+  # Install and configure salt-minion
+  # Only ubuntu add command bellow
+  # wget -O - https://repo.saltstack.com/apt/ubuntu/18.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+  provisioner "local-exec" {
+    command = "pwd; sudo salt '*' state.apply;"
+    #command = "cd /tmp; \
+    #  curl -L https://bootstrap.saltstack.com -o install_salt.sh; \
+    #  sudo sh install_salt.sh -P -M; \\
+    #  sudo salt '*' state.apply"
+  }
+}
