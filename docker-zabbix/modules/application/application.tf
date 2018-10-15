@@ -155,21 +155,8 @@ resource "null_resource" "saltstack_provisioning" {
     "docker_container.container3",
     "docker_container.container4" ],
 
-  #provisioner "salt-masterless" {
-  #  local_state_tree    = "salt"
-  #  remote_state_tree   = "/srv/salt"
-  #  local_pillar_roots  = "pillar"
-  #  remote_pillar_roots = "/srv/pillar"
-  #}
-
   # Install and configure salt-minion
-  # Only ubuntu add command bellow
-  # wget -O - https://repo.saltstack.com/apt/ubuntu/18.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
   provisioner "local-exec" {
-    command = "pwd; sudo salt '*' state.apply;"
-    #command = "cd /tmp; \
-    #  curl -L https://bootstrap.saltstack.com -o install_salt.sh; \
-    #  sudo sh install_salt.sh -P -M; \\
-    #  sudo salt '*' state.apply"
+    command = "chmod +x provisioning_with_salt.sh; ./provisioning_with_salt.sh"
   }
 }
