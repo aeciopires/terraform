@@ -149,14 +149,3 @@ resource "docker_image" "image4" {
   keep_locally = true
 }
 
-resource "null_resource" "saltstack_provisioning" {
-  depends_on = [
-    "docker_container.container2",
-    "docker_container.container3",
-    "docker_container.container4" ],
-
-  # Install and configure salt-minion
-  provisioner "local-exec" {
-    command = "chmod +x provisioning_with_salt.sh; ./provisioning_with_salt.sh"
-  }
-}
