@@ -4,10 +4,24 @@
 # https://hub.docker.com/_/mysql/
 
 #------------------------------------------------
+# Install Docker-CE locally
+resource "null_resource" "install_docker" {
+  provisioner "local-exec" {
+    working_dir = "/tmp",
+    command     = <<EOT
+      sudo curl -sSL https://get.docker.com/ | sh;
+      sudo usermod -aG docker `echo $USER`;
+      sudo setfacl -m user:`echo $USER`:rw /var/run/docker.sock
+   EOT
+  }
+}
+
+#------------------------------------------------
 # Create a container MySQL
 resource "docker_container" "container1" {
   depends_on = [
-    "docker_image.image1" ],
+    "docker_image.image1" 
+  ],
   name       = "mysql-zabbix"
   hostname   = "mysql-zabbix"
   image      = "${docker_image.image1.name}"
@@ -15,11 +29,13 @@ resource "docker_container" "container1" {
   dns_search = "${var.dns_domain_search}"
   restart    = "always"
   memory     = "${var.container_memory}"
-  env        = ["MYSQL_HOST=${var.database_address}",
-                "MYSQL_USER=${var.database_user}",
-                "MYSQL_PASSWORD=${var.database_password}",
-                "MYSQL_DATABASE=${var.database_name}",
-                "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}"]
+  env        = [
+    "MYSQL_HOST=${var.database_address}",
+    "MYSQL_USER=${var.database_user}",
+    "MYSQL_PASSWORD=${var.database_password}",
+    "MYSQL_DATABASE=${var.database_name}",
+    "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}"
+  ]
   ports {
     external = "${var.port_mysql_external}"
     internal = 3306
@@ -34,6 +50,9 @@ resource "docker_container" "container1" {
 
 # Pull image MySQL
 resource "docker_image" "image1" {
+  depends_on = [
+    "null_resource.install_docker"
+  ],
   name         = "mysql:5.7"
   keep_locally = true
 }
@@ -43,7 +62,8 @@ resource "docker_image" "image1" {
 resource "docker_container" "container2" {
   depends_on = [
     "docker_container.container1",
-    "docker_image.image2" ],
+    "docker_image.image2"
+  ],
   name       = "zabbix-server"
   hostname   = "zabbix-server"
   image      = "${docker_image.image2.name}"
@@ -51,15 +71,17 @@ resource "docker_container" "container2" {
   dns_search = "${var.dns_domain_search}"
   restart    = "always"
   memory     = "${var.container_memory}"
-  env        = ["MYSQL_ROOT_PASSWORD=${var.mysql_root_password}",
-                "MYSQL_USER=${var.database_user}",
-                "MYSQL_PASSWORD=${var.database_password}",
-                "MYSQL_DATABASE=${var.database_name}",
-                "DB_SERVER_PORT=${var.port_mysql_external}",
-                "DB_SERVER_HOST=${var.database_address}"]
+  env        = [
+    "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}",
+    "MYSQL_USER=${var.database_user}",
+    "MYSQL_PASSWORD=${var.database_password}",
+    "MYSQL_DATABASE=${var.database_name}",
+    "DB_SERVER_PORT=${var.port_mysql_external}",
+    "DB_SERVER_HOST=${var.database_address}"
+  ]
   ports {
     external = "${var.port_zabbix_server}"
-    internal = "${var.port_zabbix_server}"
+    internal = 10051
     protocol = "${var.port_protocol}"
   }
 }
@@ -75,7 +97,8 @@ resource "docker_image" "image2" {
 resource "docker_container" "container3" {
   depends_on = [
     "docker_container.container1",
-    "docker_image.image3" ],
+    "docker_image.image3"
+  ],
   name       = "zabbix-web"
   hostname   = "zabbix-web"
   image      = "${docker_image.image3.name}"
@@ -83,14 +106,16 @@ resource "docker_container" "container3" {
   dns_search = "${var.dns_domain_search}"
   restart    = "always"
   memory     = "${var.container_memory}"
-  env        = ["PHP_TZ=America/Sao_Paulo",
-                "ZBX_SERVER_HOST=${var.zabbix_address}",
-                "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}",
-                "MYSQL_USER=${var.database_user}",
-                "MYSQL_PASSWORD=${var.database_password}",
-                "MYSQL_DATABASE=${var.database_name}",
-                "DB_SERVER_PORT=${var.port_mysql_external}",
-                "DB_SERVER_HOST=${var.database_address}"]
+  env        = [
+    "PHP_TZ=America/Sao_Paulo",
+    "ZBX_SERVER_HOST=${var.zabbix_address}",
+    "MYSQL_ROOT_PASSWORD=${var.mysql_root_password}",
+    "MYSQL_USER=${var.database_user}",
+    "MYSQL_PASSWORD=${var.database_password}",
+    "MYSQL_DATABASE=${var.database_name}",
+    "DB_SERVER_PORT=${var.port_mysql_external}",
+    "DB_SERVER_HOST=${var.database_address}"
+  ]
   ports {
     external = "${var.port_http_external}"
     internal = 80
@@ -114,7 +139,8 @@ resource "docker_image" "image3" {
 resource "docker_container" "container4" {
   depends_on = [
     "docker_container.container2",
-    "docker_image.image4" ],
+    "docker_image.image4"
+  ],
   name       = "zabbix-agent"
   hostname   = "${var.hostname_agent}"
   image      = "${docker_image.image4.name}"
@@ -124,8 +150,10 @@ resource "docker_container" "container4" {
   #networks   = ["host"]
   privileged = true
   memory     = "${var.container_memory}"
-  env        = ["ZBX_HOSTNAME=${var.hostname_agent}",
-                "ZBX_SERVER_HOST=${var.zabbix_address}"]
+  env        = [
+    "ZBX_HOSTNAME=${var.hostname_agent}",
+    "ZBX_SERVER_HOST=${var.zabbix_address}"
+  ]
   ports {
     external = "${var.port_zabbix_agent}"
     internal = 10050
@@ -149,3 +177,18 @@ resource "docker_image" "image4" {
   keep_locally = true
 }
 
+#------------------------------------------------
+# Execute scripts of Zabbix API
+resource "null_resource" "zabbix_api_ubuntu18" {
+  depends_on = [
+    "docker_container.container4",
+  ],
+  provisioner "local-exec" {
+    command = <<EOT
+      sudo apt install -y python3 python3-pip;
+      pip3 install zabbix-api;
+      "`pwd`/api-zabbix/create_groups.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hostgroups.csv";
+      "`pwd`/api-zabbix/create_hosts.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hosts.csv";
+   EOT
+  }
+}

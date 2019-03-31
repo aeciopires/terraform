@@ -1,0 +1,5 @@
+host_docker_1,172.17.0.1,group_id,template_id
+host_docker_2,172.17.0.1,group_id,template_id
+host_docker_3,172.17.0.1,group_id,template_id
+host_docker_4,172.17.0.1,group_id,template_id
+host_docker_5,172.17.0.1,group_id,template_id

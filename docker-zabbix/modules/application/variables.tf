@@ -32,6 +32,11 @@ variable "mysql_root_password" {
   default = "secret"
 }
 
+variable "home_user_work_dir" {
+  description = "The user's working directory, which contains the groups.csv, hostgroup.csv, and Zabbix API access credentials."
+  default = "/home/aecio"
+}
+
 variable "dns_address" {
   description = "List of IP address DNS servers."
   default = ["8.8.8.8"]
