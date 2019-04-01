@@ -9,9 +9,11 @@ resource "null_resource" "install_docker" {
   provisioner "local-exec" {
     working_dir = "/tmp",
     command     = <<EOT
-      sudo curl -sSL https://get.docker.com/ | sh;
-      sudo usermod -aG docker `echo $USER`;
-      sudo setfacl -m user:`echo $USER`:rw /var/run/docker.sock
+      if ! ``docker --version > /dev/null 2>&1`` ; then 
+        sudo curl -sSL https://get.docker.com/ | sh;
+        sudo usermod -aG docker `echo $USER`;
+        sudo setfacl -m user:`echo $USER`:rw /var/run/docker.sock
+      fi
    EOT
   }
 }
@@ -185,10 +187,12 @@ resource "null_resource" "zabbix_api_ubuntu18" {
   ],
   provisioner "local-exec" {
     command = <<EOT
-      sudo apt install -y python3 python3-pip;
-      pip3 install zabbix-api;
-      "`pwd`/api-zabbix/create_groups.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hostgroups.csv";
-      "`pwd`/api-zabbix/create_hosts.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hosts.csv";
+      if ! ``pip3 show zabbix-api > /dev/null 2>&1`` ; then
+        sudo apt-get install -y python3 python3-pip;
+        pip3 install zabbix-api;
+      fi;
+      `pwd`/api-zabbix/create_groups.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hostgroups.csv;
+      `pwd`/api-zabbix/create_hosts.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hosts.csv;
    EOT
   }
 }

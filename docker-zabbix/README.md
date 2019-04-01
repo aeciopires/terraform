@@ -30,6 +30,7 @@ Comandos mais usados:
 
 ## Tutorial
 
+* Configure o comando ``sudo`` para não pedir a senha: https://www.vivaolinux.com.br/dica/Liberar-comandos-de-root-no-sudo-sem-pedir-senha
 * Baixe o Terraform para Linux em: https://www.terraform.io/downloads.html
 * Descompacte o pacote do Terraform.
 * Acesse o diretório descompactado do Terraform.
@@ -101,6 +102,7 @@ Useful commands:
 
 ## How to
 
+* Configure the ``sudo`` command without a password: https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/ 
 * Download Terraform for Linux: https://www.terraform.io/downloads.html
 * Unpack the Terraform package.
 * Access the unpacked directory.
