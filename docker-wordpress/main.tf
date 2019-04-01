@@ -39,5 +39,17 @@ provider "docker" {
 }
 
 module "container" {
-  source = "./modules/application"
+  source              = "./modules/application"
+  database_user       = "${var.database_user}"
+  database_password   = "${var.database_password}"
+  database_name       = "${var.database_name}"
+  database_address    = "${var.database_address}"
+  mysql_root_password = "${var.mysql_root_password}"
+  dns_address         = "${var.dns_address}"
+  dns_domain_search   = "${var.dns_domain_search}"
+  container_memory    = "${var.container_memory}"
+  port_mysql_external = "${var.port_mysql_external}"
+  port_http_external  = "${var.port_http_external}"
+  port_https_external = "${var.port_https_external}"
+  dir_host_path       = "${var.dir_host_path}"
 }

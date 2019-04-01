@@ -1,15 +1,15 @@
 # Português
 
 1. Este diretório contém os arquivos:
-   * ``main.tf`` => que define as configurações gerais do módulo que gerencia o Docker. 
-   * ``variables.tf`` => onde você pode definir os valores das variáveis
-usadas pelo ``template.tf``.
+   * ``main.tf``          => que define as configurações gerais. 
+   * ``variables.tf``     => onde você pode definir os valores das variáveis
+usadas pelo ``main.tf``.
    * ``terraform.tfvars`` => onde você pode customizar os valores padrão 
 a serem usados pelo modulo para se adequar as necessidades do seu ambiente.
 2. O subdiretório ``modules/application`` possui os arquivos:
    * ``application.tf`` => que define a criação dos conteineres mysql e 
 zabbix.
-   * ``variables.tf`` => onde são definidos os valores padrão a serem 
+   * ``variables.tf``   => onde são definidos os valores padrão a serem 
 aplicados pelo arquivo ``application.tf``. Esses valores serão usados quando 
 cada variavel não for customizada no arquivo ``terraform.tfvars``.
 3. O objetivo é instalar o Zabbix e disponibilizar o acesso na porta 80/TCP 
@@ -41,7 +41,9 @@ sudo cp terraform /usr/bin
 sudo chmod 755 /usr/bin/terraform
 ```
 
-* Caso já possua o Docker instalado, certifique-se de não ter nenhum conteiner localmente executando nas portas: 80/TCP, 443/TC, 3306/TCP, 10050/TCP e 10051/TCP. Para isso, use os seguintes comandos:
+* Caso já possua o Docker instalado, certifique-se de não ter nenhum conteiner localmente 
+executando nas portas: 80/TCP, 443/TCP, 3306/TCP, 10050/TCP e 10051/TCP. Para isso, use os 
+seguintes comandos:
 
 ```bash
 docker ps -a --format "{{.Ports}}"
@@ -64,8 +66,8 @@ sudo terraform apply -auto-approve
 sudo terraform show
 ```
 
-Neste tutorial foi mostrado como instalar o Zabbix usando conteiners Docker executados
-localmente, mas o Terraform por gerenciar o Docker em repositórios remotos ou em
+Neste tutorial foi mostrado como instalar o Zabbix usando conteiners Docker executados 
+localmente, mas o Terraform por gerenciar o Docker em repositórios remotos ou em 
 instâncias na nuvem. Para saber mais sobre o Terraform, acesse:
 
 * http://blog.aeciopires.com/conhecendo-o-terraform/
@@ -74,14 +76,14 @@ instâncias na nuvem. Para saber mais sobre o Terraform, acesse:
 # English
 
 1. This directory contains the files:<br>
-   * ``template.tf`` => that defines the general settings of module the manage Docker.<br>
-   * ``variables.tf`` => where you can define the values of the variables
-used by ``template.tf``.<br>
+   * ``template.tf``      => that defines the general settings.<br>
+   * ``variables.tf``     => where you can define the values of the variables
+used by ``main.tf``.<br>
    * ``terraform.tfvars`` => where you can customize default values
 to be used by the module to suit the needs of your environment.
 2. The ``modules/application`` subdirectory has the following files:<br>
-   * ``application.tf`` => that defines the creation of mysql and zabbix.<br>
-   * ``variables.tf`` => where the default values to be defined are applied by 
+   * ``application.tf``  => that defines the creation of mysql and zabbix.<br>
+   * ``variables.tf``    => where the default values to be defined are applied by 
 ``application.tf`` file. These values will be used when
 each variable is not customized in the ``terraform.tfvars`` file.<br>
 3. The goal is to install Zabbix and provide access on port 80/TCP the host 
@@ -113,7 +115,9 @@ sudo cp terraform /usr/bin
 sudo chmod 755 /usr/bin/terraform
 ```
 
-* If you already have Docker installed, ensure that you do not have any containers locally running on the ports: 80/TCP, 443/TCP, 3306/TCP, 10050/TCP and 10051/TCP. To do this, use the following commands:
+* If you already have Docker installed, ensure that you do not have any containers locally 
+running on the ports: 80/TCP, 443/TCP, 3306/TCP, 10050/TCP and 10051/TCP. To do this, use 
+the following commands:
 
 ```bash
 docker ps -a --format "{{.Ports}}"
@@ -136,7 +140,9 @@ sudo terraform apply -auto-approve
 sudo terraform show
 ```
 
-This tutorial showed you how to install Zabbix using Docker locally, but Terraform for managing Docker in remote repositories or in instances in the cloud. To learn more about Terraform, visit:
+This tutorial showed you how to install Zabbix using Docker locally, but Terraform for 
+managing Docker in remote repositories or in instances in the cloud. To learn more about 
+Terraform, visit:
 
 * http://blog.aeciopires.com/conhecendo-o-terraform/
 * https://www.terraform.io/docs/index.html
