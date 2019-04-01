@@ -11,16 +11,8 @@ Secret Access Key: y+7sVdfsdfsZMfOSsdfasdfasfdfasdfasSHT
 
 * Crie o diretório abaixo.
 
-No Linux:
-
 ```bash
 mkdir -p /home/NOME_USUARIO/.aws/
-```
-
-No Windows:
-
-```bash
-mkdir c:\Users\NOME_USUARIO\.aws/
 ```
 
 * Acesse o diretório criado anteriormente e crie o arquivo ``credentials`` com o seguinte conteúdo. A Access Key e Secret Key mostradas a seguir são apenas para exemplo. Elas são inválidas e você precisa trocar pelos dados reais gerados para sua conta.
@@ -31,11 +23,20 @@ aws_access_key_id = AKIAI3IZDFASDFASDFAS2OSCH7MDV3SQ
 aws_secret_access_key = y+7sVdfsdfsZMfOSsdfasdfasfdfasdfasSHT
 ```
 
-* Este projeto contém o arquivo ``template.tf`` que define as configurações gerais do Google Cloud. Ele contém também o arquivo ``variables.tf`` onde você pode definir os valores das variáveis usadas pelo ``template.tf``.
-* O subdiretório ``modules/application`` possui o arquivo ``application.tf``, que define a criação das instancias. Ele contém também o arquivo ``variables.tf``, onde você pode definir os valores das variáveis usadas pelo ``application.tf``.
-* Altere os valores de acordo com a necessidade.
-* O objetivo é criar 3 instâncias e liberar o acesso remoto.
-* O arquivo ``graph.png`` mostra o relacionamento entre os recursos gerenciados pelo Terraform.
+1. Este diretório contém os arquivos:
+   * ``main.tf``          => que define as configurações gerais. 
+   * ``variables.tf``     => onde você pode definir os valores das variáveis
+usadas pelo ``main.tf``.
+   * ``terraform.tfvars`` => onde você pode customizar os valores padrão 
+a serem usados pelo modulo para se adequar as necessidades do seu ambiente.
+2. O subdiretório ``modules/application`` possui os arquivos:
+   * ``application.tf`` => que define a criação dos conteineres mysql e 
+wordpress.
+   * ``variables.tf``   => onde são definidos os valores padrão a serem 
+aplicados pelo arquivo ``application.tf``. Esses valores serão usados quando 
+cada variavel não for customizada no arquivo ``terraform.tfvars``.
+3. O objetivo é disponibilizar o OpenProject numa instância da AWS.
+4. O arquivo ``graph.png`` mostra o relacionamento entre os recursos gerenciados pelo Terraform.
 
 Comandos mais usados:
 
@@ -49,10 +50,34 @@ Comandos mais usados:
 * terraform destroy   => Destroi a infraestrutura gerenciada pelo Terraform<br>
 * terraform output -module=instances => Exibe os resultados do modulo definidos no arquivo ``modules/application/output.tf``.
 
-No Windows, você pode baixar e descompactar o Terraform em C:\ e executá-lo no prompt do windows com a sintaxe abaixo.
+## Tutorial
+
+* Baixe o Terraform para Linux em: https://www.terraform.io/downloads.html
+* Descompacte o pacote do Terraform.
+* Acesse o diretório descompactado do Terraform.
+* Copie o binário do Terraform para o diretório ``/usr/bin`` com os seguintes comandos:
 
 ```bash
-C:\\terraform [opções]
+sudo cp terraform /usr/bin
+sudo chmod 755 /usr/bin/terraform
+```
+
+* Baixe o código fonte deste projeto com os seguintes comandos:
+
+```bash
+git clone https://github.com/aeciopires/terraform
+cd terraform/aws_docker_openproject
+sudo terraform init
+```
+
+* Altere os valores de acordo com a necessidade do ambiente no arquivo ``terraform.tfvars``.
+
+* Valide as configurações e crie o ambiente com os seguintes comandos
+
+```bash
+sudo terraform validate
+sudo terraform apply -auto-approve
+sudo terraform show
 ```
 
 # English
@@ -68,16 +93,8 @@ Secret Access Key: y+7sVdfsdfsZMfOSsdfasdfasfdfasdfasSHT
 
 * Create the directory below.
 
-Linux:
-
 ```bash
 mkdir -p /home/NOME_USUARIO/.aws/
-```
-
-Windows:
-
-```bash
-mkdir c:\Users\NOME_USUARIO\.aws/
 ```
 
 * Access the directory created previously and create the ``credentials`` file with the following content. The Access Key and Secret Key shown below are for illustration only. They are invalid and you need to exchange for the actual data generated for your account.
@@ -87,11 +104,21 @@ mkdir c:\Users\NOME_USUARIO\.aws/
 aws_access_key_id = AKIAI3IZDFASDFASDFAS2OSCH7MDV3SQ
 aws_secret_access_key = y+7sVdfsdfsZMfOSsdfasdfasfdfasdfasSHT
 ```
-* This project contains the ``template.tf`` file that defines the general Google Cloud settings. It also contains the ``variables.tf`` file where you can set the option values by ``template.tf``.
-* The ``modules/application`` subdirectory has the ``application.tf`` file that defines the creation of instances. It also contains the variables.tf file where you can define the values of the variables used by ``application.tf``.
-* Change the values according to the need.
-* The goal is to create 3 instances and release the remote access.
-* The ``graph.png`` file shows the relationship between the resources managed by Terraform.
+
+1. This directory contains the files:<br>
+   * ``template.tf``      => that defines the general settings.<br>
+   * ``variables.tf``     => where you can define the values of the variables
+used by ``main.tf``.<br>
+   * ``terraform.tfvars`` => where you can customize default values
+to be used by the module to suit the needs of your environment.
+2. The ``modules/application`` subdirectory has the following files:<br>
+   * ``application.tf`` => that defines the creation of mysql and wordpress.<br>
+   * ``variables.tf``   => where the default values to be defined are applied by 
+``application.tf`` file. These values will be used when
+each variable is not customized in the ``terraform.tfvars`` file.<br>
+3. The goal is to install OpenProject and provide access on port 80/TCP the host 
+that runs the container.<br>
+4. The ``graph.png`` file shows the relationship between the resources managed by Terraform.
 
 Useful commands:
 
@@ -105,8 +132,32 @@ Useful commands:
 * terraform destroy   => Destroy Terraform-managed infrastructure<br>
 * terraform output -module=instances => Show results of module define on ``modules/application/output.tf`` file .
 
-On Windows, you get and extract the Terraform on C:\ and execute on prompt with sintax bellow.
+## How to
+
+* Download Terraform for Linux: https://www.terraform.io/downloads.html
+* Unpack the Terraform package.
+* Access the unpacked directory.
+* Copy the Terraform binary to the ``/usr/bin`` directory with the following commands:
 
 ```bash
-C:\\terraform [options]
+sudo cp terraform /usr/bin
+sudo chmod 755 /usr/bin/terraform
+```
+
+* Download the source code of this project with the following commands:
+
+```bash
+git clone https://github.com/aeciopires/terraform
+cd terraform/aws_docker_openproject
+sudo terraform init
+```
+
+* Change the values according to the need of the environment in the ``terraform.tfvars`` file.
+
+* Validate the settings and create the environment with the following commands
+
+```bash
+sudo terraform validate
+sudo terraform apply -auto-approve
+sudo terraform show
 ```

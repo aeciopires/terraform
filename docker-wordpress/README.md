@@ -55,6 +55,7 @@ git clone https://github.com/aeciopires/terraform
 cd terraform/docker-wordpress
 sudo terraform init
 ```
+
 * Altere os valores de acordo com a necessidade do ambiente no arquivo ``terraform.tfvars``.
 
 * Valide as configurações e crie o ambiente com os seguintes comandos
@@ -128,6 +129,7 @@ git clone https://github.com/aeciopires/terraform
 cd terraform/docker-wordpress
 sudo terraform init
 ```
+
 * Change the values according to the need of the environment in the ``terraform.tfvars`` file.
 
 * Validate the settings and create the environment with the following commands
