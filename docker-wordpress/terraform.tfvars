@@ -17,6 +17,6 @@ dns_address = ["8.8.8.8"]
 dns_domain_search = ["domain.com.br"]
 container_memory = 1024
 port_mysql_external = 3306
-port_http_external = 81
+port_http_external = 80
 port_https_external = 443
 dir_host_path = "/docker/mysql/wordpress/data"

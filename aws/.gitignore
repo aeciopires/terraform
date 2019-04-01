@@ -1,3 +1,6 @@
 *.idea/
 *.vagrant/
 *.terraform/
+*.vscode/
+*terraform.tfstate
+*terraform.tfstate.backup
