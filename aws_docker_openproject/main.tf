@@ -49,5 +49,5 @@ module "instances" {
   permission_read_only = "${var.permission_read_only}"
   port_ssh_external    = "${var.port_ssh_external}"
   port_http_external   = "${var.port_http_external}"
-  port_http2_external  = "${var.port_http2_external}"
+  port_https_external  = "${var.port_https_external}"
 }
