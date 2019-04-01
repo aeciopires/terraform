@@ -4,10 +4,26 @@
 # https://hub.docker.com/_/mysql/
 
 #------------------------------------------------
+# Install Docker-CE locally
+resource "null_resource" "install_docker" {
+  provisioner "local-exec" {
+    working_dir = "/tmp",
+    command     = <<EOT
+      if ! ``docker --version > /dev/null 2>&1`` ; then 
+        sudo curl -sSL https://get.docker.com/ | sh;
+        sudo usermod -aG docker `echo $USER`;
+        sudo setfacl -m user:`echo $USER`:rw /var/run/docker.sock
+      fi
+   EOT
+  }
+}
+
+#------------------------------------------------
 # Create a container MySQL
 resource "docker_container" "container1" {
   depends_on = [
-    "docker_image.image1" ],
+    "docker_image.image1" 
+  ],
   name       = "mysql-wordpress"
   hostname   = "mysql-wordpress"
   image      = "${docker_image.image1.name}"
@@ -33,6 +49,9 @@ resource "docker_container" "container1" {
 
 # Pull image MySQL
 resource "docker_image" "image1" {
+  depends_on = [
+    "null_resource.install_docker"
+  ],
   name         = "mysql:5.7"
   keep_locally = true
 }
@@ -42,7 +61,8 @@ resource "docker_image" "image1" {
 resource "docker_container" "container2" {
   depends_on = [
     "docker_container.container1",
-    "docker_image.image2" ],
+    "docker_image.image2" 
+  ],
   name       = "wordpress"
   hostname   = "wordpress"
   image      = "${docker_image.image2.name}"

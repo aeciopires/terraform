@@ -30,8 +30,7 @@ usadas pelo ``main.tf``.
    * ``terraform.tfvars`` => onde você pode customizar os valores padrão 
 a serem usados pelo modulo para se adequar as necessidades do seu ambiente.
 2. O subdiretório ``modules/application`` possui os arquivos:
-   * ``application.tf`` => que define a criação dos conteineres mysql e 
-wordpress.
+   * ``application.tf`` => que define a criação do conteiner do OpenProject.
    * ``variables.tf``   => onde são definidos os valores padrão a serem 
 aplicados pelo arquivo ``application.tf``. Esses valores serão usados quando 
 cada variavel não for customizada no arquivo ``terraform.tfvars``.
@@ -67,7 +66,7 @@ sudo chmod 755 /usr/bin/terraform
 ```bash
 git clone https://github.com/aeciopires/terraform
 cd terraform/aws_docker_openproject
-sudo terraform init
+terraform init
 ```
 
 * Altere os valores de acordo com a necessidade do ambiente no arquivo ``terraform.tfvars``.
@@ -75,9 +74,9 @@ sudo terraform init
 * Valide as configurações e crie o ambiente com os seguintes comandos
 
 ```bash
-sudo terraform validate
-sudo terraform apply -auto-approve
-sudo terraform show
+terraform validate
+terraform apply -auto-approve
+terraform show
 ```
 
 # English
@@ -112,7 +111,7 @@ used by ``main.tf``.<br>
    * ``terraform.tfvars`` => where you can customize default values
 to be used by the module to suit the needs of your environment.
 2. The ``modules/application`` subdirectory has the following files:<br>
-   * ``application.tf`` => that defines the creation of mysql and wordpress.<br>
+   * ``application.tf`` => that defines the creation of OpenProject.<br>
    * ``variables.tf``   => where the default values to be defined are applied by 
 ``application.tf`` file. These values will be used when
 each variable is not customized in the ``terraform.tfvars`` file.<br>
@@ -149,7 +148,7 @@ sudo chmod 755 /usr/bin/terraform
 ```bash
 git clone https://github.com/aeciopires/terraform
 cd terraform/aws_docker_openproject
-sudo terraform init
+terraform init
 ```
 
 * Change the values according to the need of the environment in the ``terraform.tfvars`` file.
@@ -157,7 +156,7 @@ sudo terraform init
 * Validate the settings and create the environment with the following commands
 
 ```bash
-sudo terraform validate
-sudo terraform apply -auto-approve
-sudo terraform show
+terraform validate
+terraform apply -auto-approve
+terraform show
 ```

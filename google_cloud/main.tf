@@ -35,11 +35,15 @@
 
 # Configure the Google Cloud provider
 provider "google" {
-  credentials = "${file("/home/aecio/account.json")}"
+  credentials = "${file("${var.gcp_credential_path}")}"
   project     = "${var.gc_project}"
   zone        = "${var.gc_zone}"
 }
 
 module "instances" {
-  source = "./modules/application"
+  source              = "./modules/application"
+  gc_project          = "${var.gc_project}"
+  gc_zone             = "${var.gc_zone}"
+  machine_type        = "${var.machine_type}"
+  operating_system    = "${var.operating_system}"
 }

@@ -30,6 +30,7 @@ Comandos mais usados:
 
 ## Tutorial
 
+* Configure o comando ``sudo`` para não pedir a senha: https://www.vivaolinux.com.br/dica/Liberar-comandos-de-root-no-sudo-sem-pedir-senha
 * Baixe o Terraform para Linux em: https://www.terraform.io/downloads.html
 * Descompacte o pacote do Terraform.
 * Acesse o diretório descompactado do Terraform.
@@ -104,6 +105,7 @@ Useful commands:
 
 ## How to
 
+* Configure the ``sudo`` command without a password: https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/ 
 * Download Terraform for Linux: https://www.terraform.io/downloads.html
 * Unpack the Terraform package.
 * Access the unpacked directory.
@@ -127,7 +129,7 @@ docker ps -a --format "{{.Ports}}"
 ```bash
 git clone https://github.com/aeciopires/terraform
 cd terraform/docker-wordpress
-sudo terraform init
+terraform init
 ```
 
 * Change the values according to the need of the environment in the ``terraform.tfvars`` file.
@@ -135,9 +137,9 @@ sudo terraform init
 * Validate the settings and create the environment with the following commands
 
 ```bash
-sudo terraform validate
-sudo terraform apply -auto-approve
-sudo terraform show
+terraform validate
+terraform apply -auto-approve
+terraform show
 ```
 
 This tutorial showed you how to install Wordpress using Docker locally, but Terraform for 
