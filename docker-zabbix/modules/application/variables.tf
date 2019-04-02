@@ -59,7 +59,7 @@ variable "port_mysql_external" {
 
 variable "version_zabbix" {
   description = "Version of Zabbix."
-  default = "4.0"
+  default = "4.2"
 }
 
 variable "hostname_agent" {
