@@ -2,6 +2,11 @@
 # Changes the values default of accord with the necessity
 #-------------------------
 
+variable "populates_zabbix" {
+  description = "Populates Zabbix with data of CSV files through API."
+  default = "YES"
+}
+
 variable "database_user" {
   description = "Database user."
   default = "zabbix"
