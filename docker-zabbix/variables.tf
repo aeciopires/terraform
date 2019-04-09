@@ -22,6 +22,11 @@ variable "docker_registry_password" {
   default = "pass"
 }
 
+variable "populates_zabbix" {
+  description = "Populates Zabbix with data of CSV files through API."
+  default = "YES"
+}
+
 variable "database_user" {
   description = "Database user."
   default = "zabbix"
