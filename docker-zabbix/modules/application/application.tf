@@ -186,13 +186,22 @@ resource "null_resource" "zabbix_api_ubuntu18" {
     "docker_container.container4",
   ],
   provisioner "local-exec" {
+    # Populando dados na API do zabbix
     command = <<EOT
-      if ! ``pip3 show zabbix-api > /dev/null 2>&1`` ; then
-        sudo apt-get install -y python3 python3-pip;
-        pip3 install zabbix-api;
-      fi;
-      `pwd`/api-zabbix/create_groups.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hostgroups.csv;
-      `pwd`/api-zabbix/create_hosts.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hosts.csv;
+      if [ "${var.populates_zabbix}" = "YES" ] ; then
+        echo "YES" > /tmp/test_api_zabbix.log;
+        if ! ``pip3 show zabbix-api > /dev/null 2>&1`` ; then
+          sudo apt-get install -y python3 python3-pip;
+          pip3 install zabbix-api;
+        fi;
+
+        sleep 3;
+        /usr/bin/python `pwd`/api-zabbix/create_groups.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hostgroups.csv;
+        /usr/bin/python `pwd`/api-zabbix/create_hosts.py ${var.home_user_work_dir}/credentials_zabbix_api.txt ${var.home_user_work_dir}/hosts.csv;
+     else
+       echo "NO" > /tmp/test_api_zabbix.log;
+     fi;
+
    EOT
   }
 }
