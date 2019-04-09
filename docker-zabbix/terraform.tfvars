@@ -8,6 +8,9 @@
 # English:
 # See the `variables.tf` file for the usage description and the default values of the following variables
 
+#docker_host_socket = "tcp://172.17.1.43:2376"
+docker_host_socket = "unix:///var/run/docker.sock"
+populates_zabbix = "NO"
 database_user = "zabbix"
 database_password = "zabbix"
 database_name = "zabbix"
