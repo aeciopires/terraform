@@ -1,0 +1,10 @@
+version: '1'
+
+tools:
+  tflint:
+    files:
+      - aws_docker_openproject
+      - docker-wordpress
+      - docker-zabbix
+      - google_cloud
+ 
