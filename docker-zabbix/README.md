@@ -1,5 +1,7 @@
 # Português
 
+OBS.: Desenvolvido usando a sintaxe do Terraform 0.11.x.
+
 1. Este diretório contém os arquivos:
    * ``main.tf``          => que define as configurações gerais. 
    * ``variables.tf``     => onde você pode definir os valores das variáveis
@@ -7,9 +9,9 @@ usadas pelo ``main.tf``.
    * ``terraform.tfvars`` => onde você pode customizar os valores padrão 
 a serem usados pelo modulo para se adequar as necessidades do seu ambiente.
 2. O subdiretório ``modules/application`` possui os arquivos:
-   * ``application.tf`` => que define a criação dos conteineres mysql e 
+   * ``application.tf``   => que define a criação dos conteineres mysql e 
 zabbix.
-   * ``variables.tf``   => onde são definidos os valores padrão a serem 
+   * ``variables.tf``     => onde são definidos os valores padrão a serem 
 aplicados pelo arquivo ``application.tf``. Esses valores serão usados quando 
 cada variavel não for customizada no arquivo ``terraform.tfvars``.
 3. O objetivo é instalar o Zabbix e disponibilizar o acesso na porta 80/TCP 
@@ -75,6 +77,8 @@ instâncias na nuvem. Para saber mais sobre o Terraform, acesse:
 * https://www.terraform.io/docs/index.html
 
 # English
+
+NOTE: Developed using Terraform 0.11.x syntax.
 
 1. This directory contains the files:<br>
    * ``template.tf``      => that defines the general settings.<br>

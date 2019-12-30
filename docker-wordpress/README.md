@@ -1,5 +1,7 @@
 # Português
 
+OBS.: Desenvolvido usando a sintaxe do Terraform 0.11.x.
+
 1. Este diretório contém os arquivos:
    * ``main.tf``          => que define as configurações gerais. 
    * ``variables.tf``     => onde você pode definir os valores das variáveis
@@ -7,9 +9,9 @@ usadas pelo ``main.tf``.
    * ``terraform.tfvars`` => onde você pode customizar os valores padrão 
 a serem usados pelo modulo para se adequar as necessidades do seu ambiente.
 2. O subdiretório ``modules/application`` possui os arquivos:
-   * ``application.tf`` => que define a criação dos conteineres mysql e 
+   * ``application.tf``   => que define a criação dos conteineres mysql e 
 wordpress.
-   * ``variables.tf``   => onde são definidos os valores padrão a serem 
+   * ``variables.tf``     => onde são definidos os valores padrão a serem 
 aplicados pelo arquivo ``application.tf``. Esses valores serão usados quando 
 cada variavel não for customizada no arquivo ``terraform.tfvars``.
 3. O objetivo é instalar o Wordpress e disponibilizar o acesso na porta 80/TCP 
@@ -76,6 +78,8 @@ instâncias na nuvem. Para saber mais sobre o Terraform, acesse:
 
 # English
 
+NOTE: Developed using Terraform 0.11.x syntax.
+
 1. This directory contains the files:<br>
    * ``template.tf``      => that defines the general settings.<br>
    * ``variables.tf``     => where you can define the values of the variables
@@ -83,8 +87,8 @@ used by ``main.tf``.<br>
    * ``terraform.tfvars`` => where you can customize default values
 to be used by the module to suit the needs of your environment.
 2. The ``modules/application`` subdirectory has the following files:<br>
-   * ``application.tf`` => that defines the creation of mysql and wordpress.<br>
-   * ``variables.tf``   => where the default values to be defined are applied by 
+   * ``application.tf``   => that defines the creation of mysql and wordpress.<br>
+   * ``variables.tf``     => where the default values to be defined are applied by 
 ``application.tf`` file. These values will be used when
 each variable is not customized in the ``terraform.tfvars`` file.<br>
 3. The goal is to install Wordpress and provide access on port 80/TCP the host 

@@ -1,5 +1,7 @@
 # Português
 
+OBS.: Desenvolvido usando a sintaxe do Terraform 0.11.x.
+
 0. Será necessário você criar uma conta no Google Cloud (https://cloud.google.com) e, em seguida, baixar o arquivo com as credenciais em https://console.cloud.google.com/apis/credentials/serviceaccountkey
 1. Este diretório contém os arquivos:
    * ``main.tf``          => que define as configurações gerais. 
@@ -8,8 +10,8 @@ usadas pelo ``main.tf``.
    * ``terraform.tfvars`` => onde você pode customizar os valores padrão 
 a serem usados pelo modulo para se adequar as necessidades do seu ambiente.
 2. O subdiretório ``modules/application`` possui os arquivos:
-   * ``application.tf`` => que define a criação das instâncias.
-   * ``variables.tf``   => onde são definidos os valores padrão a serem 
+   * ``application.tf``   => que define a criação das instâncias.
+   * ``variables.tf``     => onde são definidos os valores padrão a serem 
 aplicados pelo arquivo ``application.tf``. Esses valores serão usados quando 
 cada variavel não for customizada no arquivo ``terraform.tfvars``.
 3. Altere os valores de acordo com a necessidade.
@@ -59,6 +61,8 @@ terraform show
 
 # English
 
+NOTE: Developed using Terraform 0.11.x syntax.
+
 0. You do not need to create a Google Cloud account (https://cloud.google.com) and then download the file with credentials at https://console.cloud.google.com/apis/credentials/serviceaccountkey
 1. This directory contains the files:<br>
    * ``template.tf``      => that defines the general settings.<br>
@@ -67,8 +71,8 @@ used by ``main.tf``.<br>
    * ``terraform.tfvars`` => where you can customize default values
 to be used by the module to suit the needs of your environment.
 2. The ``modules/application`` subdirectory has the following files:<br>
-   * ``application.tf`` => that defines the creation of instances.<br>
-   * ``variables.tf``   => where the default values to be defined are applied by 
+   * ``application.tf``   => that defines the creation of instances.<br>
+   * ``variables.tf``     => where the default values to be defined are applied by 
 ``application.tf`` file. These values will be used when
 each variable is not customized in the ``terraform.tfvars`` file.<br>
 3. Change the values according to the need.

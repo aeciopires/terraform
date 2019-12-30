@@ -1,5 +1,7 @@
 # Português
 
+OBS.: Desenvolvido usando a sintaxe do Terraform 0.11.x.
+
 * Será necessário você criar uma conta na Amazon AWS. Crie uma conta 'Free Tier' na Amazon https://aws.amazon.com/ siga as instruções das páginas: https://docs.aws.amazon.com/chime/latest/ag/aws-account.html e https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-limits.html. Na criação da conta será necessário cadastrar um cartão de crédito, mas como você criará instâncias usando os recursos oferecidos pelo plano 'Free Tier', nada será cobrado se você não ultrapassar o limite para o uso dos recursos e tempo oferecidos e descritos no link anterior.
 * Após a criação da conta na AWS, acesse a interface CLI da Amazon na página: https://aws.amazon.com/cli/
 * Clique no nome do usuário (canto superior direito) e escolha a opção "Security Credentials". Em seguida clique na opção "Access Keys (Access Key ID and Secret Access Key)" e clique no botão "New Access Key" para criar e visualizar o ID e o Secret da chave, conforme exemplo abaixo (https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html). A Access Key e Secret Key mostradas a seguir são apenas para exemplo. Elas são inválidas e você precisa trocar pelos dados reais gerados para sua conta.
@@ -30,8 +32,8 @@ usadas pelo ``main.tf``.
    * ``terraform.tfvars`` => onde você pode customizar os valores padrão 
 a serem usados pelo modulo para se adequar as necessidades do seu ambiente.
 2. O subdiretório ``modules/application`` possui os arquivos:
-   * ``application.tf`` => que define a criação do conteiner do OpenProject.
-   * ``variables.tf``   => onde são definidos os valores padrão a serem 
+   * ``application.tf``   => que define a criação do conteiner do OpenProject.
+   * ``variables.tf``     => onde são definidos os valores padrão a serem 
 aplicados pelo arquivo ``application.tf``. Esses valores serão usados quando 
 cada variavel não for customizada no arquivo ``terraform.tfvars``.
 3. O objetivo é disponibilizar o OpenProject numa instância da AWS.
@@ -81,6 +83,8 @@ terraform show
 
 # English
 
+NOTE: Developed using Terraform 0.11.x syntax.
+
 * You will need to create an Amazon AWS account. Create a 'Free Tier' account at Amazon https://aws.amazon.com/ follow the instructions on the pages: https://docs.aws.amazon.com/chime/latest/ag/aws-account.html and https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-limits.html. When creating the account you will need to register a credit card, but since you will create instances using the features offered by the 'Free Tier' plan, nothing will be charged if you do not exceed the limit for the use of the features and time offered and described in the previous link .
 * After creating the account in AWS, access the Amazon CLI interface at: https://aws.amazon.com/cli/
 * Click on the username (upper right corner) and choose the "Security Credentials" option. Then click on the "Access Key and Secret Access Key" option and click the "New Access Key" button to create and view the ID and Secret of the key, as shown below (https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html). The Access Key and Secret Key shown below are for illustration only. They are invalid and you need to exchange for the actual data generated for your account.
@@ -111,8 +115,8 @@ used by ``main.tf``.<br>
    * ``terraform.tfvars`` => where you can customize default values
 to be used by the module to suit the needs of your environment.
 2. The ``modules/application`` subdirectory has the following files:<br>
-   * ``application.tf`` => that defines the creation of OpenProject.<br>
-   * ``variables.tf``   => where the default values to be defined are applied by 
+   * ``application.tf``   => that defines the creation of OpenProject.<br>
+   * ``variables.tf``     => where the default values to be defined are applied by 
 ``application.tf`` file. These values will be used when
 each variable is not customized in the ``terraform.tfvars`` file.<br>
 3. The goal is to install OpenProject and provide access on port 80/TCP the host 
