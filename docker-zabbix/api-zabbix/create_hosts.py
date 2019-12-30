@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
 #
-#+------------------------------------------------------------------------------+
+#------------------------------------------------------------------------------
 # Description: Cadastra uma lista de host, IP, ID do grupo de host e ID do template
 # (previamente cadastrados no Zabbix) e informados em um arquivo no formato CSV
 # separados por , e no seguinte padrão:
@@ -39,9 +38,8 @@
 # Comandos para resolver as dependências no Ubuntu 18.04:
 #   sudo apt install -y python3 python3-pip
 #   sudo pip3 install zabbix-api
-#+------------------------------------------------------------------------------+
+#------------------------------------------------------------------------------
 
-import docstring
 import sys
 import csv
 from zabbix_api import ZabbixAPI
@@ -60,7 +58,7 @@ with open(CREDENTIALS_FILE) as f:
 
 # Lendo e cadastrando cada host encontrado em cada linha do arquivo CSV
 with open(FILE, 'rb') as f:
-    reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONE)
+    READER = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONE)
     for row in  f:
         row_string  = row.decode("utf-8")
         row_list    = row_string.split(',')
@@ -104,4 +102,4 @@ with open(FILE, 'rb') as f:
         })
 
 # Logout da API do Zabbix
-exit = zapi.user.logout([])
+exit = zapi.user.logout

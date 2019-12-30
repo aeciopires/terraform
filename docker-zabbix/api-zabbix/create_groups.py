@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
-#+------------------------------------------------------------------------------+
+#
+#------------------------------------------------------------------------------
 # Description: Cadastra uma lista de grupo de hosts informados em um arquivo no formato CSV
 # (separados por ',' e o grupo de host deve ser informado um por linha).
 #
@@ -31,9 +31,8 @@
 # Comandos para resolver as dependências no Ubuntu 18.04:
 #   sudo apt install -y python3 python3-pip
 #   sudo pip3 install zabbix-api
-#+------------------------------------------------------------------------------+
+#------------------------------------------------------------------------------
 
-import docstring
 import sys
 import csv
 from zabbix_api import ZabbixAPI
@@ -60,4 +59,4 @@ with open(FILE, 'rb') as f:
         })
 
 # Logout da API do Zabbix
-exit = zapi.user.logout([])
+exit = zapi.user.logout
