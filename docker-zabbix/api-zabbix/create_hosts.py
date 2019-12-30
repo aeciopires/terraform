@@ -102,4 +102,4 @@ with open(FILE, 'rb') as f:
         })
 
 # Logout da API do Zabbix
-exit = zapi.user.logout
+EXIT = zapi.user.logout

@@ -51,7 +51,7 @@ with open(CREDENTIALS_FILE) as f:
 
 # Lendo e cadastrando o grupo encontrado em cada linha do arquivo CSV
 with open(FILE, 'rb') as f:
-    reader = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONE)
+    READER = csv.reader(f, delimiter=',', quoting=csv.QUOTE_NONE)
     for group in f:
         #print ("Create group in line: ", f.line_num)
         created_group = zapi.hostgroup.create({
@@ -59,4 +59,4 @@ with open(FILE, 'rb') as f:
         })
 
 # Logout da API do Zabbix
-exit = zapi.user.logout
+EXIT = zapi.user.logout
