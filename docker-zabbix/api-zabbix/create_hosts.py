@@ -41,9 +41,10 @@
 #   sudo pip3 install zabbix-api
 #+------------------------------------------------------------------------------+
 
-from zabbix_api import ZabbixAPI
-import csv
+import docstring
 import sys
+import csv
+from zabbix_api import ZabbixAPI
 
 # Definindo variaveis
 CREDENTIALS_FILE = sys.argv[1]
@@ -51,11 +52,11 @@ FILE = sys.argv[2]
 
 # Lendo as credenciais
 with open(CREDENTIALS_FILE) as f:
-    credentials = [x.strip().split(',') for x in f.readlines()]
-    for url,username,password in credentials:
+    CREDENTIALS = [x.strip().split(',') for x in f.readlines()]
+    for url, username, password in CREDENTIALS:
         # Passando as credenciais para a API do Zabbix
         zapi = ZabbixAPI(server=url, timeout=120)
-        zapi.login(username,password)
+        zapi.login(username, password)
 
 # Lendo e cadastrando cada host encontrado em cada linha do arquivo CSV
 with open(FILE, 'rb') as f:
