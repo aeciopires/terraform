@@ -40,7 +40,7 @@ cd terraform
 7. Do commit and push files to repository remote with command: `
 git push --set-upstream origin US-${DEV_NAME}`. <br>
    Example: *git push --set-upstream origin US-AECIO*
-8. Create Merge Request (MR) to the Master branch, using the notations patterns of the development process
+8. Create Pull Request (PR) to the Master branch, using the notations patterns of the development process
 9. Update the content with the suggestions of the reviewer (if necessary).
 
 **WARNING:** Before start to contribute, run the command: `git pull origin master` to fetch the newest content of the main branch and avoid conflicts that can make you waste time.
