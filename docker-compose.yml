@@ -1,0 +1,69 @@
+# Local cloud emulators for this learning path. Every lab and every
+# Terragrunt unit in live/ is applied here first, for free, before
+# (optionally) being applied to a real AWS account or GCP project.
+# See REQUIREMENTS.md section 5.
+#
+# References (versions this file was tested with):
+# - floci 2.1.0 (AWS):     https://github.com/floci-io/floci/tree/2.1.0
+# - floci-gcp 0.9.0 (GCP): https://github.com/floci-io/floci-gcp/tree/0.9.0
+#   docs/configuration/docker-compose.md and environment-variables.md
+#
+# Host ports can be changed with FLOCI_AWS_PORT, FLOCI_GCP_PORT and
+# FLOCI_ALB_HOST_PORTS (for example when another project already uses 4566).
+# Remember to change AWS_ENDPOINT_URL / FLOCI_*_ENDPOINT in your .env too.
+name: learning-terraform
+
+services:
+  floci:
+    image: floci/floci:2.1.0
+    container_name: learning-terraform-floci
+    ports:
+      - "${FLOCI_AWS_PORT:-4566}:4566"   # AWS-compatible API (AWS CLI, SDKs, Terraform/OpenTofu)
+      # Load balancer listeners: floci binds every ALB listener on its own
+      # container, one port each (floci_alb_port in live/aws/*/*/env.hcl).
+      # Another range on your machine: FLOCI_ALB_HOST_PORTS=9080-9089.
+      - "${FLOCI_ALB_HOST_PORTS:-8080-8089}:8080-8089"
+    environment:
+      FLOCI_DEFAULT_REGION: us-east-1
+      # "persistent" survives `docker compose down` via ./.floci/aws below.
+      FLOCI_STORAGE_MODE: persistent
+      # Containers floci starts (ECS tasks, RDS) reach floci at http://floci:4566.
+      FLOCI_HOSTNAME: floci
+    volumes:
+      # Lets floci run ECS tasks and RDS databases as real Docker containers.
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.floci/aws:/app/data
+    networks:
+      - floci-net
+    # The floci/floci image has bash but no curl/wget: probe the port with
+    # bash's /dev/tcp instead.
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/127.0.0.1/4566"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  floci-gcp:
+    image: floci/floci-gcp:0.9.0
+    container_name: learning-terraform-floci-gcp
+    ports:
+      - "${FLOCI_GCP_PORT:-4588}:4588"   # every emulated GCP API (REST and gRPC)
+    environment:
+      FLOCI_GCP_HOSTNAME: floci-gcp
+      FLOCI_GCP_BASE_URL: http://floci-gcp:4588
+      FLOCI_GCP_DEFAULT_PROJECT_ID: floci-local
+      # "hybrid" = in memory with an asynchronous flush to ./.floci/gcp.
+      FLOCI_GCP_STORAGE_MODE: hybrid
+      FLOCI_GCP_STORAGE_PERSISTENT_PATH: /app/data
+      # Sidecars floci-gcp starts (Cloud Run, Cloud SQL) join this network.
+      FLOCI_GCP_SERVICES_DOCKER_NETWORK: learning-terraform-floci-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./.floci/gcp:/app/data
+    networks:
+      - floci-net
+
+networks:
+  floci-net:
+    name: learning-terraform-floci-net

@@ -1,0 +1,54 @@
+# Git hooks run on every `git commit` (after `pre-commit install`), with the
+# tools mise installed. Run them on every file with: pre-commit run -a
+#
+# References:
+# - https://pre-commit.com
+# - https://github.com/antonbabenko/pre-commit-terraform (v1.109.2)
+# - https://terraform-docs.io/how-to/pre-commit-hooks/
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: detect-private-key
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.109.2
+    hooks:
+      # Format .tf/.tftest.hcl and the Terragrunt .hcl files.
+      - id: terraform_fmt
+        files: ^(modules|labs)/
+        args: [--hook-config=--tf-path=tofu]
+      - id: terragrunt_fmt
+        files: ^live/
+      # Rewrite the generated part of each module README (between the
+      # BEGIN_TF_DOCS/END_TF_DOCS markers) with the repository's config.
+      - id: terraform_docs
+        files: ^modules/
+        args:
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=true
+          - --hook-config=--create-file-if-not-exist=false
+          - --args=--config=.terraform-docs.yml
+      - id: terraform_tflint
+        files: ^(modules|labs)/
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+      - id: terraform_trivy
+        files: ^modules/
+        args:
+          - --args=--severity=HIGH,CRITICAL
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.10
+    hooks:
+      - id: ruff-check
+      - id: ruff-format
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck

@@ -1,0 +1,9 @@
+# Copy to terraform.tfvars (loaded automatically) or pass with -var-file.
+environment   = "stg"
+team          = "data-engineering"
+create_readme = false
+pets = {
+  cat   = 2
+  dog   = 3
+  horse = 1
+}

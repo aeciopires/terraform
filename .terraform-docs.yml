@@ -1,0 +1,46 @@
+# terraform-docs configuration shared by every module, wrapper and example
+# in modules/. The Makefile runs, for each directory with a README.md:
+#   terraform-docs --config .terraform-docs.yml <dir>
+# which rewrites ONLY the text between the BEGIN_TF_DOCS/END_TF_DOCS markers
+# of <dir>/README.md (output.mode = inject); the rest of the README is
+# written by hand. `make docs-check` fails if a README is out of date.
+#
+# Reference (v0.24.0): https://terraform-docs.io/user-guide/configuration/
+formatter: markdown table
+
+version: ">= 0.24.0, < 1.0.0"
+
+# The text above the markers (description, diagram, usage) is written by
+# hand, so only the generated reference sections are shown.
+sections:
+  show:
+    - requirements
+    - providers
+    - modules
+    - resources
+    - inputs
+    - outputs
+
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+sort:
+  enabled: true
+  by: required
+
+settings:
+  anchor: true
+  default: true
+  escape: true
+  hide-empty: true
+  html: true
+  indent: 2
+  lockfile: false
+  required: true
+  sensitive: true
+  type: true

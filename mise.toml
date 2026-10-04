@@ -1,0 +1,25 @@
+# Every command-line tool this repository uses, pinned, so `mise install`
+# installs the same versions on every machine (REQUIREMENTS.md section 3).
+# Python packages (boto3, pytest, ruff...) are managed by uv from
+# pyproject.toml/uv.lock; mise installs uv itself.
+#
+# Versions checked on 2026-10-03 against each project's GitHub releases.
+# Before upgrading one, read its changelog, then run `make test-all`.
+# `mise ls-remote <tool>` lists the available versions.
+[tools]
+# IaC
+terraform = "1.16.5"      # https://github.com/hashicorp/terraform/releases
+opentofu = "1.13.1"       # https://github.com/opentofu/opentofu/releases
+terragrunt = "1.1.6"      # https://github.com/gruntwork-io/terragrunt/releases
+# Quality: lint, security, documentation, git hooks
+tflint = "0.64.0"         # https://github.com/terraform-linters/tflint/releases
+trivy = "0.75.0"          # https://github.com/aquasecurity/trivy/releases
+terraform-docs = "0.24.0" # https://github.com/terraform-docs/terraform-docs/releases
+pre-commit = "4.6.2"      # https://github.com/pre-commit/pre-commit/releases
+shellcheck = "0.11.0"     # https://github.com/koalaman/shellcheck/releases
+# Python (scripts and tests) and its package manager
+python = "3.14"           # kept in sync with .python-version
+uv = "0.12"               # https://github.com/astral-sh/uv/releases
+# Cloud CLIs and helpers used by the README commands
+aws-cli = "2"             # https://github.com/aws/aws-cli
+jq = "1.8.2"              # https://github.com/jqlang/jq/releases

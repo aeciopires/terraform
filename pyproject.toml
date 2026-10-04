@@ -1,0 +1,49 @@
+[project]
+name = "learning-terraform"
+version = "1.0.0"
+description = "Helper scripts and tests for the Terraform/OpenTofu/Terragrunt learning path (pt-BR), tested against the floci and floci-gcp emulators."
+readme = "README.md"
+requires-python = ">=3.14"
+license = { file = "LICENSE" }
+dependencies = [
+    "boto3>=1.43.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.0",
+    "mypy>=2.4.0",
+    "boto3-stubs[s3,sqs,sns,ec2,elbv2,ecs,rds]>=1.43.0",
+]
+
+[tool.uv]
+# Scripts only - nothing to build or install as a package.
+package = false
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "smoke: needs the emulators running and the live/ stacks applied (make tg-apply)",
+]
+addopts = "-m 'not smoke'"
+
+[tool.coverage.run]
+branch = true
+source = ["scripts"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true

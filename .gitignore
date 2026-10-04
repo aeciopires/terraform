@@ -1,6 +1,40 @@
-*.idea/
-*.vscode/
-*.vagrant/
-*.terraform/
-terraform.tfstate
-terraform.tfstate.backup
+# Editors / OS
+.idea/
+.vscode/
+.vagrant/
+.DS_Store
+
+# Terraform / OpenTofu
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfplan
+# Lock files are not committed here because the same code runs with two
+# binaries that use different registries (registry.terraform.io and
+# registry.opentofu.org). In a real project, commit the lock file of every
+# root module - see docs/08-boas-praticas.md.
+.terraform.lock.hcl
+
+# Terragrunt
+.terragrunt-cache/
+.terragrunt-stack/
+.terragrunt-tf
+
+# Emulator data (docker-compose.yml)
+.floci/
+
+# Environment overrides (see .env.example)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
